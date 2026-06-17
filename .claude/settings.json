@@ -1,28 +1,26 @@
 {
   "permissions": {
-    "blocklist": {
-      "description": "민감 파일 접근 차단 (프로젝트 레벨)",
-      "files": [
-        ".env",
-        ".env.local",
-        ".env.*.local",
-        ".env.production",
-        ".env.development",
-        "credentials*",
-        "*.pem",
-        "*.key",
-        "*.p12",
-        "*.pfx",
-        ".aws/**",
-        ".ssh/**",
-        "secrets/**",
-        ".kube/**",
-        ".docker/config.json",
-        "node_modules/.env*"
-      ],
-      "operations": ["read", "write"],
-      "reason": "API 키, 비밀번호, 개인키 등 민감 정보 보호",
-      "message": "🔒 민감 파일 접근 거부\n\n접근 시도한 파일:\n  - 환경변수: .env*\n  - 인증서: *.pem, *.key\n  - 클라우드: .aws/*, .kube/**\n  - 기타: credentials*, secrets/**\n\n필요시 .claude/SECURITY.md를 참고하세요."
-    }
+    "deny": [
+      "Read(.env*)",
+      "Read(credentials*)",
+      "Read(*.pem)",
+      "Read(*.key)",
+      "Read(*.p12)",
+      "Read(.aws/**)",
+      "Read(.kube/**)",
+      "Read(secrets/**)",
+      "Read(.ssh/**)",
+      "Read(.docker/config.json)",
+      "Write(.env*)",
+      "Write(credentials*)",
+      "Write(*.pem)",
+      "Write(*.key)",
+      "Write(*.p12)",
+      "Write(.aws/**)",
+      "Write(.kube/**)",
+      "Write(secrets/**)",
+      "Write(.ssh/**)",
+      "Write(.docker/config.json)"
+    ]
   }
 }
