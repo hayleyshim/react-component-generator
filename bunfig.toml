@@ -1,0 +1,3 @@
+[test]
+# Test file patterns
+timeout = 30000
