@@ -22,5 +22,33 @@
       "Write(.ssh/**)",
       "Write(.docker/config.json)"
     ]
+  },
+  "sandbox": {
+    "filesystem": {
+      "denyRead": [
+        ".env*",
+        "credentials*",
+        "*.pem",
+        "*.key",
+        "*.p12",
+        ".aws/**",
+        ".kube/**",
+        "secrets/**",
+        ".ssh/**",
+        ".docker/config.json"
+      ],
+      "denyWrite": [
+        ".env*",
+        "credentials*",
+        "*.pem",
+        "*.key",
+        "*.p12",
+        ".aws/**",
+        ".kube/**",
+        "secrets/**",
+        ".ssh/**",
+        ".docker/config.json"
+      ]
+    }
   }
 }
