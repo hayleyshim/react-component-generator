@@ -601,6 +601,33 @@
   font-weight: 750;
 }
 
+.viewport-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.viewport-btn {
+  padding: 6px 10px;
+  background: transparent;
+  border: 2px solid var(--line-strong);
+  border-radius: 0;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.16s ease;
+}
+
+.viewport-btn:hover {
+  background: var(--surface-muted);
+  border-color: var(--text-muted);
+}
+
+.viewport-btn--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #FFFAF3;
+}
+
 .preview-content {
   padding: 18px;
   background: #FFFAF3;
