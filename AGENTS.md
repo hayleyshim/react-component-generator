@@ -36,43 +36,46 @@ bun run preview
 
 **DO:**
 - Use Bun's built-in TypeScript support (`bun run` auto-transpiles .ts files).
-- Store AI system prompt as string constant in `server/index.ts` (SYSTEM_PROMPT).
-- Validate provider selection (anthropic | google) and API key presence before fetch.
-- Update SYSTEM_PROMPT if new component generation rules are needed.
+- Modify SYSTEM_PROMPT when component generation rules change.
+- Validate provider (anthropic | google) and API key before API calls.
+- Update nested AGENTS.md files when adding new modules.
 
 **DON'T:**
 - Mix TypeScript syntax into generated component code.
 - Add external npm packages to generated code.
 - Forget CORS headers when adding new API routes.
-- Use relative imports for server code (import from absolute paths only).
+- Hardcode provider selection or API keys.
 
 ## Project Context
 
 **Goal:** Instant React component generation from natural language prompts with live preview.
 
-**Tech Stack:** React 19, TypeScript, Vite (frontend) | Bun (backend) | react-live (sandbox rendering) | Anthropic/Google APIs
-
-**Architecture Boundary:** Server proxies AI API calls (localhost:3002) ↔ Frontend (localhost:5173) communicates via /api/* routes.
+**Tech Stack:** React 19, TypeScript, Vite (frontend) | Bun (backend) | react-live (sandbox) | Anthropic/Google APIs
 
 ## Standards & References
 
 ### Commit & Git
 
-- Use conventional commits: `feat:`, `fix:`, `style:`, `chore:`, `docs:` prefixes.
-- Korean messages required (per repo convention).
-- Reference CLAUDE.md for recent changes and git history intent.
+- Conventional commits: `feat:`, `fix:`, `style:`, `chore:`, `docs:`, `refactor:`
+- Korean messages (repo convention)
+- See CLAUDE.md for recent changes and architecture
 
 ### Code Conventions
 
-- **Naming:** camelCase for functions/variables; PascalCase for React components; SCREAMING_SNAKE_CASE for constants.
-- **Frontend:** Functional components + React hooks only. No class components.
-- **Backend:** Single Bun.serve() instance; route all logic through fetch handler.
-- **Styling:** CSS modules or inline styles only. No Tailwind (use App.css for global rules, inline for components).
+- **Naming:** camelCase (functions/vars), PascalCase (components), SCREAMING_SNAKE_CASE (constants)
+- **Frontend:** Functional components + React hooks only
+- **Backend:** Single Bun.serve() instance; all logic in fetch handler
+- **Styling:** CSS modules or inline styles only
 
 ### Maintenance Policy
 
-If rules conflict with working code, update this file. If CLAUDE.md and AGENTS.md diverge, prefer CLAUDE.md for architecture details.
+If rules conflict with working code, update this file. CLAUDE.md is authoritative for architecture.
+
+## Context Map (Task Routing)
+
+- **[API Server & AI Integration (./server/AGENTS.md)](./server/AGENTS.md)** — Modify API endpoints, SYSTEM_PROMPT, or AI provider logic.
+- **[Frontend Components & Hooks (./src/AGENTS.md)](./src/AGENTS.md)** — Build React components, manage state, or adjust react-live integration.
 
 ---
 
-Reference: @CLAUDE.md for development architecture and file structure.
+Reference: @CLAUDE.md
