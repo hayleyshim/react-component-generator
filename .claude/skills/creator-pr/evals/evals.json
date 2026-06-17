@@ -1,0 +1,23 @@
+{
+  "skill_name": "pr-creator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create a PR with title='Add responsive view buttons to component preview' and description about testing on different viewport sizes",
+      "expected_output": "PR successfully created with feature branch, pushed to GitHub, and PR URL returned",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Open a PR titled 'Fix API timeout issue' with custom description 'Increases timeout from 5 seconds to 15 seconds for slow networks'",
+      "expected_output": "PR created with fix/ branch prefix, proper commit message, and description in PR body",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Generate a PR without providing description - just title 'Update documentation'",
+      "expected_output": "PR created with auto-generated description based on git diff and commit history",
+      "files": []
+    }
+  ]
+}
