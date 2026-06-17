@@ -52,6 +52,20 @@
     }
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/block-sensitive-files.sh",
+            "shell": "bash",
+            "statusMessage": "민감 파일 접근 확인 중...",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
