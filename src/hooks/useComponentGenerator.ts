@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { GeneratedComponent, Provider } from '../types';
 
 interface UseComponentGeneratorReturn {
@@ -11,9 +11,22 @@ interface UseComponentGeneratorReturn {
 }
 
 export function useComponentGenerator(): UseComponentGeneratorReturn {
-  const [components, setComponents] = useState<GeneratedComponent[]>([]);
+  const [components, setComponents] = useState<GeneratedComponent[]>(() => {
+    try {
+      const stored = localStorage.getItem('rcg_components');
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      return parsed.map((c: any) => ({ ...c, createdAt: new Date(c.createdAt) }));
+    } catch {
+      return [];
+    }
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    localStorage.setItem('rcg_components', JSON.stringify(components));
+  }, [components]);
 
   const generate = useCallback(async (prompt: string, apiKey: string | undefined, provider: Provider) => {
     setIsLoading(true);
@@ -54,6 +67,7 @@ export function useComponentGenerator(): UseComponentGeneratorReturn {
 
   const clearAll = useCallback(() => {
     setComponents([]);
+    localStorage.removeItem('rcg_components');
   }, []);
 
   return { components, isLoading, error, generate, removeComponent, clearAll };

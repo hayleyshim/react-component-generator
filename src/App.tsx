@@ -13,7 +13,10 @@ const PROVIDER_CONFIG = {
 function App() {
   const [apiKey, setApiKey] = useState('');
   const [showKey, setShowKey] = useState(false);
-  const [provider, setProvider] = useState<Provider>('google');
+  const [provider, setProvider] = useState<Provider>(() => {
+    const stored = localStorage.getItem('rcg_provider');
+    return (stored === 'anthropic' || stored === 'google') ? stored : 'google';
+  });
   const [envKeys, setEnvKeys] = useState<Record<Provider, boolean>>({
     anthropic: false,
     google: false,
@@ -40,6 +43,7 @@ function App() {
 
   const handleProviderChange = (newProvider: Provider) => {
     setProvider(newProvider);
+    localStorage.setItem('rcg_provider', newProvider);
     setApiKey('');
   };
 
