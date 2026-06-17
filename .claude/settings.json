@@ -50,5 +50,21 @@
         ".docker/config.json"
       ]
     }
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-tdd.sh",
+            "shell": "bash",
+            "statusMessage": "TDD 테스트 파일 확인 중...",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
   }
 }
